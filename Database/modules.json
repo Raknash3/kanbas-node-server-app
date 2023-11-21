@@ -1,0 +1,74 @@
+[
+  {
+    "_id": "M101",
+    "name": "Week 0: Introduction to Web development",
+    "description": "Learn to install new libraries and code with HTML",
+    "course": "RS101"
+  },
+  {
+    "_id": "M102",
+    "name": "Week 1: Styling with Bootstrap and CSS",
+    "description": "Apply styling over HTML",
+    "course": "RS101"
+  },
+  {
+    "_id": "M103",
+    "name": "Week 2: JS and React.js ",
+    "description": "Learn to use React.js for creating SPAs",
+    "course": "RS101"
+  },
+  {
+    "_id": "M201",
+    "name": "Week 0: Introduction to Applied Statistics",
+    "description": "Learn about various statistical methods used in data mining",
+    "course": "RS102"
+  },
+  {
+    "_id": "M202",
+    "name": "Week 1: MBA",
+    "description": "Intro to market Basket analysis and to develope a code for MBA",
+    "course": "RS102"
+  },
+  {
+    "_id": "M203",
+    "name": "Week 2: Clustering algorithms ",
+    "description": "Intro to various clsutering algorithms and hands on practice",
+    "course": "RS102"
+  },
+  {
+    "_id": "M301",
+    "name": "Spacecraft Structural Design",
+    "description": "Fundamentals of designing spacecraft structures and materials selection.",
+    "course": "RS103"
+  },
+  {
+    "_id": "M302",
+    "name": "Orbital Mechanics",
+    "description": "Understanding orbital dynamics and mission planning.",
+    "course": "RS103"
+  },
+  {
+    "_id": "M303",
+    "name": "Spacecraft Systems Engineering",
+    "description": "Overview of spacecraft systems and subsystems engineering.",
+    "course": "RS103"
+  },
+  {
+    "_id": "M401",
+    "name": "Spacecraft Structural Design",
+    "description": "Fundamentals of designing spacecraft structures and materials selection.",
+    "course": "RS104"
+  },
+  {
+    "_id": "M402",
+    "name": "Orbital Mechanics",
+    "description": "Understanding orbital dynamics and mission planning.",
+    "course": "RS104"
+  },
+  {
+    "_id": "M403",
+    "name": "Spacecraft Systems Engineering",
+    "description": "Overview of spacecraft systems and subsystems engineering.",
+    "course": "RS104"
+  }
+]
