@@ -8,15 +8,16 @@ const assignment = {
 };
 
 const todos = [
-    { id: 1, title: "Task 1", completed: false },
-    { id: 2, title: "Task 2", completed: false },
-    { id: 3, title: "Task 3", completed: true },
-    { id: 4, title: "Task 4", completed: false },
+    { id: 1, title: "Task 1", description: "Create a NodeJS server with ExpressJS", due: "2021-09-09", completed: false },
+    { id: 2, title: "Task 2", description: "Create a ML model", due: "2021-09-09", completed: true },
+    { id: 3, title: "Task 3", description: "Create a robotics program", due: "2021-09-09", completed: true },
+    { id: 4, title: "Task 4", description: "Create a SQL program to fetch data from DB", due: "2021-09-09", completed: false },
 ];
 
 
 
 const Lab5 = (app) => {
+
     app.get("/a5/welcome", (req, res) => {
         res.send("Welcome to Assignment 5");
     });
@@ -83,6 +84,84 @@ const Lab5 = (app) => {
         res.json(assignment);
     });
 
+    app.get("/a5/todos/create", (req, res) => {
+        const newTodo = {
+            id: new Date().getTime(),
+            title: "New Todo",
+            description: "New Description",
+            due: new Date().toISOString().slice(0, 10),
+            completed: false,
+        };
+        todos.push(newTodo);
+        res.json(todos);
+    });
+
+
+    app.get("/a5/todos/:id", (req, res) => {
+        const { id } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        res.json(todo);
+    });
+
+    app.get("/a5/todos/:id/title/:title", (req, res) => {
+        const { id, title } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        todo.title = title;
+        res.json(todos);
+    });
+
+    app.get("/a5/todos/:id/description/:description", (req, res) => {
+        const { id, description } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        todo.description = description;
+        res.json(todos);
+    });
+
+    app.get("/a5/todos/:id/completed/:completed", (req, res) => {
+        const { id, completed } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        todo.completed = completed;
+        res.json(todos);
+    });
+
+    
+
+
+    app.delete("/a5/todos/:id", (req, res) => {
+        const { id } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        if (!todo) {
+            res.status(404)
+                .json({
+                    message:
+                        `Unable to delete Todo with ID ${id}`
+                });
+            return;
+        }
+        todos.splice(todos.indexOf(todo), 1);
+        res.sendStatus(200);
+    });
+
+    app.put("/a5/todos/:id", (req, res) => {
+        const { id } = req.params;
+        const todo = todos.find((t) => t.id === parseInt(id));
+        if (!todo) {
+            res.status(404)
+        
+                .json({
+                    message:
+                        `Unable to update Todo with ID ${id}`
+                });
+            return;
+        }
+        todo.title = req.body.title;
+        todo.description = req.body.description;
+        todo.due = req.body.due;
+        todo.completed = req.body.completed;
+        res.sendStatus(200);
+    });
+
+
     app.post("/a5/todos", (req, res) => {
         const newTodo = {
             ...req.body,
@@ -97,99 +176,12 @@ const Lab5 = (app) => {
         if (completed) {
             const comp = completed === "true";
             const t = todos.filter((todo) => todo.completed === comp);
-            res.json(t)
+            res.json(t);
             return;
         }
         res.json(todos);
     });
 
-
-
-
-    app.get("/a5/todos/create", (req, res) => {
-        const newTodo = {
-            id: new Date().getTime(),
-            title: "New Task",
-            completed: false,
-        };
-        todos.push(newTodo);
-        res.json(todos);
-    });
-
-    app.delete("/a5/todos/:id", (req, res) => {
-        const { id } = req.params;
-        const todo = todos.find((t) => t.id === parseInt(id));
-        if (!todo) {
-            res.res
-                .status(404)
-                .json({
-                    message:
-                        `Unable to delete Todo with ID ${id}`
-                });
-            return;
-        }
-
-        todos.splice(todos.indexOf(todo), 1);
-        res.sendStatus(200);
-    });
-
-    app.put("/a5/todos/:id", (req, res) => {
-        const { id } = req.params;
-        const todo = todos.find((t) => t.id === parseInt(id));
-        if (!todo) {
-            res.res
-                .status(404)
-                .json({
-                    message:
-                        `Unable to update Todo with ID ${id}`
-                });
-            return;
-        }
-
-        app.get("/a5/todos/:id", (req, res) => {
-            const { id } = req.params;
-            const todo = todos.find((t) => t.id === parseInt(id));
-            if (!todo) {
-                res.status(404).send("Todo not found");
-                return;
-            }
-            res.json(todo);
-        });
-
-
-        app.get("/a5/todos/:id/delete", (req, res) => {
-            const { id } = req.params;
-            const todo = todos.find((t) => t.id === parseInt(id));
-            if (!todo) {
-                res.status(404).send("Todo not found");
-                return;
-            }
-            todos.splice(todos.indexOf(todo), 1);
-            res.json(todos);
-        });
-
-
-
-
-        app.get("/a5/todos/:id/title/:title", (req, res) => {
-            const { id, title } = req.params;
-            const todo = todos.find((t) => t.id === parseInt(id));
-            if (!todo) {
-                res.status(404).send("Todo not found");
-                return;
-            }
-            todo.title = title;
-            res.json(todos);
-        });
-
-
-
-        todo.title = req.body.title;
-        todo.description = req.body.description;
-        todo.due = req.body.due;
-        todo.completed = req.body.completed;
-        res.sendStatus(200);
-    });
 
 
 };
